@@ -1,6 +1,5 @@
 "use client";
-import React, { ReactNode } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import React from "react";
 import { Message } from "ai";
 import { Grid } from "react-loader-spinner";
 import ReactMarkdown from "react-markdown";
@@ -73,6 +72,7 @@ export default function Bubble({
           <img
             src="images/assistant-avatar.png"
             className="h-12 w-12 rounded-full bg-pink-500"
+            alt="assistant"
           />
           <div className="leading-relaxed bg-white rounded-b-xl rounded-tr-xl text-black p-4 relative">
             {!isFirst && (
