@@ -52,7 +52,7 @@ export default function Bubble({
       }`}
     >
       {message.role === "user" ? (
-        <div className="flex justify-end">
+        <div className="flex justify-end leading-relaxed bg-white rounded-b-xl rounded-tl-xl text-black p-4">
           <p className="leading-relaxed">
             <span className="block font-bold text-gray-700">You</span>
             {!loading && message.content}
