@@ -3,35 +3,45 @@ import React, { ReactNode } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Message } from "ai";
 import { Grid } from "react-loader-spinner";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 
 export default function Bubble({
   message,
   loading = false,
+  isFirst = false,
+  id,
 }: {
   message: Message;
   loading?: boolean;
+  isFirst?: boolean;
+  id: number | string;
 }) {
+  const rateResponse = async (rate: number) => {
+    
+    if(rate === -1) {
+      document.getElementById('rateUp')?.remove()
+    } else if(rate === 1) {
+      document.getElementById('rateDown')?.remove()
+    } else {
+      return;
+    }
 
-  interface CustomRendererProps {
-    level?: number;
-    href?: string;
-    children?: ReactNode;
-  }
-  
-  const renderers = {
-    heading: ({ level, children }: CustomRendererProps) => {
-      // Custom heading rendering
-      return React.createElement(`h${level}`, { className: `custom-heading-${level}` }, children);
-    },
-    link: ({ href, children }: CustomRendererProps) => {
-      // Custom link rendering
-      return <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
-    },
-    listItem: ({ children }: CustomRendererProps) => {
-      // Custom list item rendering
-      return <li style={{ listStyleType: 'circle' }}>{children}</li>;
-    },
+    const data = {
+      api_key: process.env.MENDABLE_API_KEY,
+      message_id: id,
+      rating_value: rate,
+    };
+    console.log(`Key: ${data.api_key} Id: ${data.api_key} Rate: ${data.rating_value}`);
+
+    const req = await fetch("https://api.mendable.ai/v0/rateMessage", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .catch((error) => console.error("Error:", error));
   };
 
   return (
@@ -64,7 +74,25 @@ export default function Bubble({
             src="images/assistant-avatar.png"
             className="h-12 w-12 rounded-full bg-pink-500"
           />
-          <div className="leading-relaxed bg-white rounded-b-xl rounded-tr-xl text-black p-4 ">
+          <div className="leading-relaxed bg-white rounded-b-xl rounded-tr-xl text-black p-4 relative">
+            {!isFirst && (
+              <div className="flex gap-2 top-[1rem] left-10 absolute">
+                <button
+                  id="rateDown"
+                  className="hover:scale-105"
+                  onClick={() => rateResponse(-1)}
+                >
+                  👎
+                </button>
+                <button
+                  className="hover:scale-105"
+                  onClick={() => rateResponse(1)}
+                  id="rateUp"
+                >
+                  👍
+                </button>
+              </div>
+            )}
             <span className="block font-bold text-gray-700">AI</span>
             {!loading && <ReactMarkdown>{message.content}</ReactMarkdown>}
             {loading && (

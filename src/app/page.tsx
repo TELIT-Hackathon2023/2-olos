@@ -36,14 +36,15 @@ export default function Home() {
         <div className="rounded-2xl border-purple-700 border-opacity-5  border lg:w-3/4 flex-grow flex flex-col bg-[url('/images/bg.png')] bg-cover max-h-[80%] px-8 py-4 w-[80%]">
           <ScrollArea className="h-[90%] pr-2 w-full" ref={scrollAreaRef}>
             <Bubble
+              id="initialai"
               message={{
                 role: "assistant",
                 content: welcomeMessage,
                 id: "initialai",
-              }}
+              }} isFirst={true}
             />
             {messages.map((message) => (
-              <Bubble key={message.id} message={message} />
+              <Bubble key={message.id} message={message} id={message.id}/>
             ))}
           </ScrollArea>
           <div>

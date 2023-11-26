@@ -2,6 +2,7 @@ import { Configuration, OpenAIApi } from "openai-edge";
 import { StreamingTextResponse } from "ai";
 import { MendableStream } from "@/lib/mendable_stream";
 import { welcomeMessage } from "@/lib/strings";
+import { log } from "console";
 
 export const runtime = "edge";
 
@@ -32,11 +33,16 @@ export async function POST(req: Request) {
 
   const history = [];
   for (let i = 0; i < messages.length; i += 2) {
+    console.log("Response: " + messages[i + 1].content);
+    
     history.push({
       prompt: messages[i].content,
       response: messages[i + 1].content,
     });
   }
+
+  console.log(history);
+  
 
   history.unshift({
     prompt: "",
