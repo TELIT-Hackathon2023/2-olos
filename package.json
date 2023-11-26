@@ -18,8 +18,11 @@
     "fs": false
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.27.2",
     "@microsoft/fetch-event-source": "^2.0.1",
+    "@prisma/client": "^5.6.0",
     "@radix-ui/react-avatar": "^1.0.3",
+    "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.6",
     "@radix-ui/react-scroll-area": "^1.0.4",
@@ -46,7 +49,8 @@
     "tailwind-merge": "^1.13.2",
     "tailwindcss": "3.3.2",
     "tailwindcss-animate": "^1.0.6",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
     "@types/eventsource": "^1.1.11"

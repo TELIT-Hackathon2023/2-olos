@@ -28,13 +28,10 @@ export default function Home() {
   }, [messages]);
 
   return (
-    <main className="h-screen bg-white p-6 flex flex-col w-full">
-      <div className="flex flex-col gap-8 w-full items-center flex-grow max-h-full">
-        <h1 className=" text-4xl text-transparent font-extralight bg-clip-text bg-gradient-to-r from-violet-800 to-fuchsia-500">
-          Tardis Chatbot
-        </h1>
-        <div className="rounded-2xl border-purple-700 border-opacity-5  border lg:w-3/4 flex-grow flex flex-col bg-[url('/images/bg.png')] bg-cover max-h-[80%] px-8 py-4 w-[80%]">
-          <ScrollArea className="h-[90%] pr-2 w-full" ref={scrollAreaRef}>
+      <div className="flex flex-col items-center justif h-screen w-full">
+        
+        <div className="border-purple-700 border-opacity-5  border flex-grow flex flex-col bg-[url('/images/bg.png')] bg-cover h-full px-8 py-4 w-full">
+          <ScrollArea className="h-[85%] pr-2 w-full" ref={scrollAreaRef}>
             <Bubble
               id="initialai"
               message={{
@@ -50,7 +47,7 @@ export default function Home() {
           <div>
             <form
               onSubmit={handleSubmit}
-              className="flex items-center justify-center w-full space-x-2 z-10"
+              className="flex items-center justify-center w-full space-x-2 z-10 marker:b-3"
             >
               <Input
                 placeholder="Type your message"
@@ -78,6 +75,5 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </main>
   );
 }
